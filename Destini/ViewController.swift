@@ -36,10 +36,13 @@ class ViewController: UIViewController {
             switch currentStorySequence {
             case 0:
                 updateStoryScreen(withStorySequence: 2 )
+            case 1:
+                updateStoryScreen(withStorySequence: 2)
+            case 2:
+                updateStoryScreen(withStorySequence: 5)
             default:
                 print("ERROR")
             }
-            
         } else {
             
         }
@@ -51,8 +54,14 @@ class ViewController: UIViewController {
     func updateStoryScreen(withStorySequence storySequence: Int){
         currentStorySequence = storySequence
         storyTextView.text = storyBank[currentStorySequence].storyText
+        if storyBank[currentStorySequence].answerA == "end" {
+            topButton.isHidden = true
+            bottomButton.isHidden = true
+            
+        } else {
         topButton.setTitle(storyBank[currentStorySequence].answerA, for: .normal)
         bottomButton.setTitle(storyBank[currentStorySequence].answerB, for: .normal)
+        }
     }
 }
 
