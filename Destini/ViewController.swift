@@ -44,7 +44,16 @@ class ViewController: UIViewController {
                 print("ERROR")
             }
         } else {
-            
+            switch currentStorySequence {
+            case 0:
+                updateStoryScreen(withStorySequence: 1 )
+            case 1:
+                updateStoryScreen(withStorySequence: 3)
+            case 2:
+                updateStoryScreen(withStorySequence: 4)
+            default:
+                print("ERROR")
+            }
         }
         // TODO Step 4: Write an IF-Statement to update the views
                 
@@ -57,11 +66,22 @@ class ViewController: UIViewController {
         if storyBank[currentStorySequence].answerA == "end" {
             topButton.isHidden = true
             bottomButton.isHidden = true
-            
+            let restartAction: UIAlertAction = UIAlertAction(title: "Restart Story", style: .default, handler: {
+                (UIAlertAction) in self.startOver()})
+            let alert: UIAlertController = UIAlertController (title: "END", message: "Try again?", preferredStyle: .actionSheet)
+            alert.addAction(restartAction)
+            present(alert, animated: true, completion: nil)
         } else {
         topButton.setTitle(storyBank[currentStorySequence].answerA, for: .normal)
         bottomButton.setTitle(storyBank[currentStorySequence].answerB, for: .normal)
+            }
         }
+    
+    func startOver() {
+        currentStorySequence = 0
+        topButton.isHidden = false
+        bottomButton.isHidden = false
+        updateStoryScreen(withStorySequence: currentStorySequence)
     }
 }
 
